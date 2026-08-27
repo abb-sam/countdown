@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown</title>
+  <style>
+       h1 { text-align: center; }
+       .value { font-family: 'Courier New', Courier, monospace; }
+       .countdown {
+        background: #c0c0c0;
+        border: 4px ridge #c0c0c0;
+        padding: 20px;
+        width: 500px;
+        margin: 40px auto;
+        text-align: center;
+       }
+       @keyframes blink { 50% { opacity: 0; } }
+       .blink { animation: blink 1s step-end infinite; }
+
+  </style>
+</head>
+<body>
+
+  <h1>Time until I see you again...</h1>
+
+  <div class="countdown">
+    <div class="unit">
+      <span class="value" id="days">--</span>
+      <span class="label">days</span>
+    </div>
+    <div class="unit">
+      <span class="value" id="hours">--</span>
+      <span class="label">hours</span>
+    </div>
+    <div class="unit">
+      <span class="value" id="minutes">--</span>
+      <span class="label">minutes</span>
+    </div>
+    <div class="unit">
+      <span class="value" id="seconds">--</span>
+      <span class="label">seconds</span>
+    </div>
+  </div>
+
+  <script>
+    // Set date here, Format: "YYYY-MM-DDTHH:MM:SS"
+    const target = new Date("2026-09-11T19:00:00"); 
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function update() {
+      const now = new Date();
+      const gap = target - now; // milliseconds remaining
+
+      if (gap <= 0) {
+        document.querySelector(".countdown").textContent = "It's timeeeeee!!!! 🎉🎉🎉🎉🎉🎉";
+      } else {
+        const totalSeconds = gap / 1000;
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+
+        daysEl.textContent = days;
+        hoursEl.textContent = hours;
+        minutesEl.textContent = minutes;
+        secondsEl.textContent = seconds;
+      }
+    }
+
+    update();                  // run once now so it doesn't start on dashes
+    setInterval(update, 1000); // then tick every second
+  </script>
+
+</body>
+</html>
