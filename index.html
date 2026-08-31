@@ -5,17 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Countdown</title>
   <style>
-       h1 { text-align: center; }
+       h1 { 
+       text-align: center;
+       font-size: 50px;
+      
+      }
        .value { font-family: 'Courier New', Courier, monospace; }
        .countdown {
-        background: #c0c0c0;
-        border: 4px ridge #c0c0c0;
-        padding: 20px;
-        max-width: 500px;
+        width: 300px;
+        height: 280px;
+        background: #ff4d6d;
+        clip-path: path("M150,280 C40,190 10,110 10,70 C10,30 60,10 100,40 C130,62 150,90 150,90 C150,90 170,62 200,40 C240,10 290,30 290,70 C290,110 260,190 150,280 Z");
         box-sizing: border-box;
-        margin: 40px auto;
+        padding: 110px 50px 90px;  /* pushes content into the fat middle */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         text-align: center;
        }
+       body {
+       margin: 0;
+       background-color: #f79faf;
+       min-height: 10vh;
+       display: flex;
+       flex-direction: column;   
+       align-items: center;      /* horizontal center */
+       justify-content: center;  /* vertical center */
+      }
+      .monkey {
+        position: fixed;
+        width: 80px;
+        image-rendering: pixelated;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .monkey.tl { top: 10px;    left: 10px;  }
+      .monkey.tr { top: 10px;    right: 10px; }
+      .monkey.bl { bottom: 10px; left: 10px;  }
+      .monkey.br { bottom: 10px; right: 10px; }
+      @media (max-width: 500px) {
+        .monkey {width: 44px};
+        .monkey.tl, .monkey.tr {display: none;}
+      }
        @keyframes blink { 50% { opacity: 0; } }
        .blink { animation: blink 1s step-end infinite; }
 
@@ -44,9 +76,14 @@
     </div>
   </div>
 
+  <img class="monkey tl" src="monkeypls.gif" alt="">
+  <img class="monkey tr" src="monkeypls.gif" alt="">
+  <img class="monkey bl" src="monkeypls.gif" alt="">
+  <img class="monkey br" src="monkeypls.gif" alt="">
+
   <script>
     // Set date here, Format: "YYYY-MM-DDTHH:MM:SS"
-    const target = new Date("2026-09-11T19:00:00"); 
+    const target = new Date("2026-09-11T21:00:00"); 
 
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
